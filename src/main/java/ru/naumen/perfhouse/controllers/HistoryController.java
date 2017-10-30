@@ -76,7 +76,7 @@ public class HistoryController
         return getDataAndViewByDate(client, DataType.RESPONSE, year, month, 0, HISTORY_VIEW, true);
     }
 
-    @RequestMapping(path = "/history/{client}/actions/{year}/{month}")
+    @RequestMapping(path = "/history/{client}/actions/{year}/{month}")     //kek
     public ModelAndView actionsByMonth(@PathVariable("client") String client,
             @PathVariable(name = "year", required = false) int year,
             @PathVariable(name = "month", required = false) int month) throws ParseException
