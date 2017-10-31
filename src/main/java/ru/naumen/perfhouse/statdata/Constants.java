@@ -63,7 +63,7 @@ public class Constants
 
         public static final String ADD_ACTIONS = "addActions";
         public static final String EDIT_ACTIONS = "editActions";
-        public static final String CATALOGS_ACTION = "catalogsAction"; //новое действие
+        public static final String CATALOGS_ACTION = "catalogsAction"; //GetCatalogsAction
         public static final String LIST_ACTIONS = "listActions";
         public static final String COMMENT_ACTIONS = "commentActions";
         public static final String GET_FORM_ACTIONS = "getFormActions";

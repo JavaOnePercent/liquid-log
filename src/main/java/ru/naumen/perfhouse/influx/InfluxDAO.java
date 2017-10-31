@@ -124,7 +124,7 @@ public class InfluxDAO
                 .addField(ERRORS, errors.getErrorCount())
                 .addField(ADD_ACTIONS, dones.getAddObjectActions())
                 .addField(EDIT_ACTIONS, dones.getEditObjectsActions())
-                .addField(CATALOGS_ACTION, dones.getCatalogsAction()) //новое действие
+                .addField(CATALOGS_ACTION, dones.getCatalogsAction()) //GetCatalogsAction
                 .addField(LIST_ACTIONS, dones.geListActions())
                 .addField(COMMENT_ACTIONS, dones.getCommentActions())
                 .addField(GET_FORM_ACTIONS, dones.getFormActions())

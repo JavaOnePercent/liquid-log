@@ -34,7 +34,7 @@ public class ActionDoneParser
     long count;
     private int addObjectActions = 0;
     private int editObjectsActions = 0;
-    private int getCatalogsAction = 0; //новое действие
+    private int getCatalogsAction = 0; //GetCatalogsAction
     private int getListActions = 0;
     private int commentActions = 0;
 
@@ -108,7 +108,7 @@ public class ActionDoneParser
 
     public int getCatalogsAction(){
         return getCatalogsAction;
-    } //новое действие
+    } //GetCatalogsAction
 
     public int getFormActions()
     {
@@ -191,7 +191,7 @@ public class ActionDoneParser
             {
                 editObjectsActions++;
             }
-            else if(actionInLowerCase.equals("getcatalogsaction")) //новое действие
+            else if(actionInLowerCase.equals("getcatalogsaction")) //GetCatalogsAction
             {
                 getCatalogsAction++;
             }
