@@ -1,6 +1,8 @@
 package ru.naumen.perfhouse.controllers;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -15,12 +17,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import ru.naumen.perfhouse.influx.InfluxDAO;
+import ru.naumen.sd40.log.parser.App;
 
 /**
  * Created by dkirpichenkov on 26.10.16.
@@ -30,6 +32,7 @@ public class ClientsController
 {
     private Logger LOG = LoggerFactory.getLogger(ClientsController.class);
     private InfluxDAO influxDAO;
+    private App app;
 
     @Inject
     public ClientsController(InfluxDAO influxDAO)
@@ -46,6 +49,7 @@ public class ClientsController
         HashMap<String, Object> clientMonthLinks = new HashMap<>();
         HashMap<String, Object> clientLast2016Links = new HashMap<>();
         HashMap<String, Object> clientPreviousMonthLinks = new HashMap<>();
+        HashMap<String, Object> clientParsing = new HashMap<>();
 
         DateTime now = DateTime.now();
         DateTime prevMonth = now.minusMonths(1);
@@ -69,6 +73,7 @@ public class ClientsController
         model.put("last864links", clientLast864Links);
         model.put("last2016links", clientLast2016Links);
         model.put("prevMonthLinks", clientPreviousMonthLinks);
+        model.put("parsing", clientParsing);
 
         return new ModelAndView("clients", model, HttpStatus.OK);
     }
@@ -86,10 +91,23 @@ public class ClientsController
             influxDAO.storeFromJSon(null, client, measure);
             response.sendError(HttpServletResponse.SC_OK);
         }
+
         catch (Exception ex)
         {
             LOG.error(ex.toString(), ex);
             throw ex;
+        }
+    }
+    @RequestMapping(path = "/strpars", method = RequestMethod.POST)
+    public void strpars(@RequestParam("namedb") String namedb,
+                  @RequestParam("parsingmode") String parsingmode,
+                  @RequestParam("timezone") String timezone,
+                  @RequestParam(value = "logresult", required = false) boolean logresult,
+                  @RequestParam("file") MultipartFile file) throws  IOException, ParseException {
+        try {
+            app.parser(namedb, parsingmode, timezone, logresult, file);
+        } catch (IOException | ParseException e) {
+            LOG.error(e.toString(), e);
         }
     }
 }

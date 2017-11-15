@@ -25,27 +25,37 @@
 <body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript">
-    	function setupModal(client){
-    		$('#formFrom').val(moment().format("DD/MM/YYYY"))
-    		$('#formTo').val(moment().format("DD/MM/YYYY"))
-    		$('#formTo').datepicker({
-    			format: "dd/mm/yyyy"
-    		})
-    		$('#formFrom').datepicker({
-    			format: "dd/mm/yyyy",
-    		})
-    		
-    		$('#formMaxResults').val(100)
-    		$('#customForm').attr('action','/history/'+client+'/custom')
-    		console.log(moment().format('zz'))
-    	}
     </script>
+    <script type="text/javascript">
+        	function setupModal(client){
+        		$('#formFrom').val(moment().format("DD/MM/YYYY"))
+        		$('#formTo').val(moment().format("DD/MM/YYYY"))
+        		$('#formTo').datepicker({
+        			format: "dd/mm/yyyy"
+        		})
+        		$('#formFrom').datepicker({
+        			format: "dd/mm/yyyy",
+        		})
+
+        		$('#formMaxResults').val(100)
+        		$('#customForm').attr('action','/history/'+client+'/custom')
+        		console.log(moment().format('zz'))
+        	}
+        </script>
+        <script type="text/javascript">
+        function reload(){
+        location.reload;
+        }
+        </script>
 <div class="container">
 	<br>
 	<div class="alert alert-info">
   		<h3><strong>Attention!</strong><br>All requests for stored data are made with UTC time.<br>Requested data will be displayed in your browsers timezone.</h3>
 	</div>
 	<br>
+	<h1>Log file</h1>
+	<br>
+    <button id="buttonpars" name="buttonpars" class="btn btn-success" data-toggle="modal" data-target="#parserform">Parser</button>
     <h1>Client list</h1>
     <table class="table table-striped table-fixed"> <!-- table-bordered  -->
         <thead class="thead-inverse">
@@ -79,7 +89,7 @@
 				<h4 class="modal-title" id="myModalLabel">Select dates and max results</h4>
 			</div>
 			<form id="customForm">
-				<div class="modal-body">
+	    			<div class="modal-body">
 				    <div class="row">
 				        <div class="col-md-6">
                             <div class="form-group">
@@ -107,6 +117,95 @@
 		</div>
 	</div>
 </div>
+
+<div class="modal fade" id="parserform" >
+	<div class=modal-dialog role="dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="myModalLabel2">Parsing Parameters</h4>
+			</div>
+			<form id="parsForm" method="POST" action="/strpars" enctype="multipart/form-data">
+	    			<div class="modal-body">
+	    			<div class="form-group">
+	    			    <label for="formCount">Name database</label>
+	    			    <input class="form-control" type="text" id="namedb" name="namedb">
+	    			</div>
+				    <div class="row">
+				        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Parsing mode">Parsing mode</label>
+                                <select class="form-control" id="parsingmode" name="parsingmode">
+                                	    <option value="sdng">sdng</option>
+                                	    <option value="gc">gc</option>
+                                	    <option value="top">top</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Timezone">Timezone</label>
+                                <select class="form-control" id="timezone" name="timezone">
+                                    	<option value="GMT-12">GMT-12</option>
+                                    	<option value="GMT-11">GMT-11</option>
+                                    	<option value="GMT-10">GMT-10</option>
+                                    	<option value="GMT-9">GMT-9</option>
+                                    	<option value="GMT-8">GMT-8</option>
+                                    	<option value="GMT-7">GMT-7</option>
+                                    	<option value="GMT-6">GMT-6</option>
+                                    	<option value="GMT-5">GMT-5</option>
+                                    	<option value="GMT-4">GMT-4</option>
+                                    	<option value="GMT-3:30">GMT-3:30</option>
+                                    	<option value="GMT-3">GMT-3</option>
+                                    	<option value="GMT-2">GMT-2</option>
+                                    	<option value="GMT-1">GMT-1</option>
+                                    	<option value="GMT+0">GMT+0</option>
+                                    	<option value="GMT+1">GMT+1</option>
+                                    	<option value="GMT+2">GMT+2</option>
+                                    	<option value="GMT+3">GMT+3</option>
+                                    	<option value="GMT+3:30">GMT+3:30</option>
+                                    	<option value="GMT+4">GMT+4</option>
+                                    	<option value="GMT+4:30">GMT+4:30</option>
+                                    	<option value="GMT+5">GMT+5</option>
+                                    	<option value="GMT+5:30">GMT+5:30</option>
+                                    	<option value="GMT+5:45">GMT+5:45</option>
+                                    	<option value="GMT+6">GMT+6</option>
+                                    	<option value="GMT+6:30">GMT+6:30</option>
+                                    	<option value="GMT+7">GMT+7</option>
+                                    	<option value="GMT+8">GMT+8</option>
+                                    	<option value="GMT+8:30">GMT+8:30</option>
+                                    	<option value="GMT+8:45">GMT+8:45</option>
+                                    	<option value="GMT+9">GMT+9</option>
+                                    	<option value="GMT+9:30">GMT+9:30</option>
+                                    	<option value="GMT+10">GMT+10</option>
+                                    	<option value="GMT+10:30">GMT+10:30</option>
+                                    	<option value="GMT+11">GMT+11</option>
+                                    	<option value="GMT+12">GMT+12</option>
+                                    	<option value="GMT+12:45">GMT+12:45</option>
+                                    	<option value="GMT+13">GMT+13</option>
+                                    	<option value="GMT+14">GMT+14</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Path to file">Path to file</label>
+                        <input class="form-control" id="file" type="file" name="file"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="Log the result">Log the result</label>
+                        <input id="logresult" type="checkbox" name="logresult">
+                    </div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-success">Parsing</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
 </body>
 
 </html>
