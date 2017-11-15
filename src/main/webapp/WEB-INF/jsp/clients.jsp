@@ -52,10 +52,11 @@
 	<div class="alert alert-info">
   		<h3><strong>Attention!</strong><br>All requests for stored data are made with UTC time.<br>Requested data will be displayed in your browsers timezone.</h3>
 	</div>
-	<br>
-	<h1>Log file</h1>
+	<h1>Parsing log</h1>
 	<br>
     <button id="buttonpars" name="buttonpars" class="btn btn-success" data-toggle="modal" data-target="#parserform">Parser</button>
+    <br>
+    <br>
     <h1>Client list</h1>
     <table class="table table-striped table-fixed"> <!-- table-bordered  -->
         <thead class="thead-inverse">
@@ -124,7 +125,7 @@
 			<div class="modal-header">
 				<h4 class="modal-title" id="myModalLabel2">Parsing Parameters</h4>
 			</div>
-			<form id="parsForm" method="POST" action="/strpars" enctype="multipart/form-data">
+			<form id="parsForm" method="POST" enctype="multipart/form-data">
 	    			<div class="modal-body">
 	    			<div class="form-group">
 	    			    <label for="formCount">Name database</label>

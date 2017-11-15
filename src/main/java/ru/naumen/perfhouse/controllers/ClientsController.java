@@ -98,16 +98,18 @@ public class ClientsController
             throw ex;
         }
     }
-    @RequestMapping(path = "/strpars", method = RequestMethod.POST)
-    public void strpars(@RequestParam("namedb") String namedb,
+    @RequestMapping(path = "/", method = RequestMethod.POST)
+    public ModelAndView index(@RequestParam("namedb") String namedb,
                   @RequestParam("parsingmode") String parsingmode,
                   @RequestParam("timezone") String timezone,
                   @RequestParam(value = "logresult", required = false) boolean logresult,
                   @RequestParam("file") MultipartFile file) throws  IOException, ParseException {
         try {
             app.parser(namedb, parsingmode, timezone, logresult, file);
+            return index();
         } catch (IOException | ParseException e) {
             LOG.error(e.toString(), e);
+            throw e;
         }
     }
 }
