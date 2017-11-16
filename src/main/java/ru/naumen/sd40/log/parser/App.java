@@ -18,7 +18,7 @@ import ru.naumen.sd40.log.parser.GCParser.GCTimeParser;
  */
 public class App
 {
-    public static void parser(String namedb, String parsingmode, String timezone, Boolean logresult, MultipartFile file) throws IOException, ParseException
+    public void parser(String namedb, String parsingmode, String timezone, Boolean logresult, MultipartFile file) throws IOException, ParseException
     {
         String influxDb = namedb;
         influxDb = influxDb.replaceAll("-", "_");

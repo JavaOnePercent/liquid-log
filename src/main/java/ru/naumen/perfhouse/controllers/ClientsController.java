@@ -32,8 +32,7 @@ public class ClientsController
 {
     private Logger LOG = LoggerFactory.getLogger(ClientsController.class);
     private InfluxDAO influxDAO;
-    private App app;
-
+    private App app = new App();
     @Inject
     public ClientsController(InfluxDAO influxDAO)
     {
@@ -49,7 +48,6 @@ public class ClientsController
         HashMap<String, Object> clientMonthLinks = new HashMap<>();
         HashMap<String, Object> clientLast2016Links = new HashMap<>();
         HashMap<String, Object> clientPreviousMonthLinks = new HashMap<>();
-        HashMap<String, Object> clientParsing = new HashMap<>();
 
         DateTime now = DateTime.now();
         DateTime prevMonth = now.minusMonths(1);
@@ -73,7 +71,6 @@ public class ClientsController
         model.put("last864links", clientLast864Links);
         model.put("last2016links", clientLast2016Links);
         model.put("prevMonthLinks", clientPreviousMonthLinks);
-        model.put("parsing", clientParsing);
 
         return new ModelAndView("clients", model, HttpStatus.OK);
     }
