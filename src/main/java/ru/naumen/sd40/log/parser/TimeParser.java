@@ -21,7 +21,7 @@ public class TimeParser
     public TimeParser()
     {
         DATE_FORMAT.setTimeZone(TimeZone.getTimeZone("GMT"));
-    }
+    } //
 
     public TimeParser(String zoneId)
     {
